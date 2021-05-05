@@ -4,16 +4,6 @@
 <!-- |    EDITING THIS FILE BY HAND IS NOT RECOMMENDED                                 | -->
 <!-- =================================================================================== -->
 <robot name="stochlite">
-  <!-- <xacro:include filename="$(find teraranger_description)/urdf/base_hub.urdf.xacro"/> -->
-  <!-- <xacro:include filename="$(find teraranger_description)/urdf/teraranger_one.urdf.xacro"/>     -->
-  <!-- For KDL -->
-  <!-- <link name="dummy">
-        </link>
-        
-        <joint name="dummy_joint" type="fixed">
-            <parent link="dummy"/>
-            <child link="base_link"/>
-        </joint> -->
   <link name="base_link">
     <inertial>
       <origin rpy="0 0 0" xyz="0.00011698 0.00043344 -0.0081282"/>
@@ -416,6 +406,38 @@
     <parent link="br_shank_link"/>
     <child link="br_toe_link"/>
   </joint>
+  <link name="fl_leg_frame">
+        </link>
+  <link name="fr_leg_frame">
+        </link>
+  <link name="bl_leg_frame">
+        </link>
+  <link name="br_leg_frame">
+        </link>
+  <joint name="fl_fixed" type="fixed">
+    <parent link="base_link"/>
+    <child link="fl_leg_frame"/>
+    <origin rpy="0 0 0" xyz="0.16695 0.0956 -0.0050001"/>
+    <axis xyz="1 0 0"/>
+  </joint>
+  <joint name="fr_fixed" type="fixed">
+    <parent link="base_link"/>
+    <child link="fr_leg_frame"/>
+    <origin rpy="0 0 0" xyz="0.16695 -0.0964 -0.0049999"/>
+    <axis xyz="1 0 0"/>
+  </joint>
+  <joint name="bl_fixed" type="fixed">
+    <parent link="base_link"/>
+    <child link="bl_leg_frame"/>
+    <origin rpy="0 0 0" xyz="-0.16695 0.0956 -0.0049999"/>
+    <axis xyz="1 0 0"/>
+  </joint>
+  <joint name="br_fixed" type="fixed">
+    <parent link="base_link"/>
+    <child link="br_leg_frame"/>
+    <origin rpy="0 0 0" xyz="-0.16695 -0.0964 -0.0050001"/>
+    <axis xyz="1 0 0"/>
+  </joint>
   <transmission name="fl_abd_trans">
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="fl_abd_joint">
@@ -687,7 +709,7 @@
     <plugin filename="libhector_gazebo_ros_imu.so" name="imu_1_controller">
       <updateRate>20</updateRate>
       <bodyName>imu_link_1</bodyName>
-      <topicName>imu_1/data</topicName>
+      <topicName>sensors/imu_1</topicName>
       <accelDrift>0.005 0.005 0.005</accelDrift>
       <accelGaussianNoise>0.005 0.005 0.005</accelGaussianNoise>
       <rateDrift>0.005 0.005 0.005 </rateDrift>
@@ -747,7 +769,7 @@
         </range>
       </ray>
       <plugin filename="libgazebo_ros_range.so" name="tof_plugin_1">
-        <topicName>gazebo/range_tof_1</topicName>
+        <topicName>sensors/range_tof_1</topicName>
         <frameName>frame_range_tof_1</frameName>
         <gaussianNoise>0.0001</gaussianNoise>
         <updateRate>20</updateRate>
@@ -807,7 +829,7 @@
         </range>
       </ray>
       <plugin filename="libgazebo_ros_range.so" name="tof_plugin_2">
-        <topicName>gazebo/range_tof_2</topicName>
+        <topicName>sensors/range_tof_2</topicName>
         <frameName>frame_range_tof_2</frameName>
         <gaussianNoise>0.0001</gaussianNoise>
         <updateRate>20</updateRate>
@@ -867,7 +889,7 @@
         </range>
       </ray>
       <plugin filename="libgazebo_ros_range.so" name="tof_plugin_6">
-        <topicName>gazebo/range_tof_6</topicName>
+        <topicName>sensors/range_tof_6</topicName>
         <frameName>frame_range_tof_6</frameName>
         <gaussianNoise>0.0001</gaussianNoise>
         <updateRate>20</updateRate>
@@ -927,7 +949,7 @@
         </range>
       </ray>
       <plugin filename="libgazebo_ros_range.so" name="tof_plugin_4">
-        <topicName>gazebo/range_tof_4</topicName>
+        <topicName>sensors/range_tof_4</topicName>
         <frameName>frame_range_tof_4</frameName>
         <gaussianNoise>0.0001</gaussianNoise>
         <updateRate>20</updateRate>
@@ -987,7 +1009,7 @@
         </range>
       </ray>
       <plugin filename="libgazebo_ros_range.so" name="tof_plugin_3">
-        <topicName>gazebo/range_tof_3</topicName>
+        <topicName>sensors/range_tof_3</topicName>
         <frameName>frame_range_tof_3</frameName>
         <gaussianNoise>0.0001</gaussianNoise>
         <updateRate>20</updateRate>
@@ -1047,7 +1069,7 @@
         </range>
       </ray>
       <plugin filename="libgazebo_ros_range.so" name="tof_plugin_5">
-        <topicName>gazebo/range_tof_5</topicName>
+        <topicName>sensors/range_tof_5</topicName>
         <frameName>frame_range_tof_5</frameName>
         <gaussianNoise>0.0001</gaussianNoise>
         <updateRate>20</updateRate>
