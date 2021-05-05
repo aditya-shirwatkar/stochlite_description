@@ -6,13 +6,12 @@
     <xacro:include filename="$(find stochlite_description)/urdf/stochlite.gazebo.xacro" />
     <xacro:include filename="$(find stochlite_description)/urdf/stochlite.materials.xacro" />
     <xacro:include filename="$(find stochlite_description)/urdf/stochlite.sensors.xacro" />
-    <!-- <xacro:include filename="$(find teraranger_description)/urdf/base_hub.urdf.xacro"/> -->
-    <!-- <xacro:include filename="$(find teraranger_description)/urdf/teraranger_one.urdf.xacro"/>     -->
+    <xacro:include filename="$(find stochlite_description)/urdf/stochlite.leg_frames.xacro" />
     
 
     <!-- For defining the links and joints-->
-    <xacro:stochlite_description />
-
+    <xacro:stochlite_description fixed="false"/>
+    <xacro:stochlite_leg_frames />
 
     <!-- For hardware interface and ros control-->
     <xacro:stochlite_transmission name="fl_abd"/>
