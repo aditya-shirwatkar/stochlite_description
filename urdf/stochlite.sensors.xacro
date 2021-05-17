@@ -30,7 +30,7 @@
             <plugin filename="libhector_gazebo_ros_imu.so" name="imu_${id}_controller">
                 <updateRate>${update_rate}</updateRate>
                 <bodyName>imu_link_${id}</bodyName>
-                <topicName>imu_${id}/data</topicName>
+                <topicName>sensors/imu_${id}</topicName>
                 <accelDrift>0.005 0.005 0.005</accelDrift>
                 <accelGaussianNoise>${gnoise} ${gnoise} ${gnoise}</accelGaussianNoise>
                 <rateDrift>0.005 0.005 0.005 </rateDrift>
@@ -98,7 +98,7 @@
                     </range>
                 </ray>
                 <plugin name="tof_plugin_${id}" filename="libgazebo_ros_range.so">
-                    <topicName>gazebo/range_tof_${id}</topicName>
+                    <topicName>sensors/range_tof_${id}</topicName>
                     <frameName>frame_range_tof_${id}</frameName>
                     <gaussianNoise>${gnoise}</gaussianNoise>
                     <updateRate>${update_rate}</updateRate>
@@ -113,5 +113,19 @@
 
     </xacro:macro>
 
+    <!-- Contact Sensor Plugins -->
+    <xacro:macro name="contact_sensor" params="leg_name">
+        <gazebo reference="${leg_name}_shank_link">
+            <sensor name="${leg_name}_link_contact_sensor" type="contact">
+                <contact>
+                    <collision>${leg_name}_shank_link_collision</collision>
+                </contact>
+                <plugin name="gazebo_ros_bumper_controller" filename="libgazebo_ros_bumper.so">
+                    <bumperTopicName>${leg_name}_contact</bumperTopicName>
+                    <frameName>${leg_name}_shank_link</frameName>
+                </plugin>
+            </sensor>
+        </gazebo>
+    </xacro:macro>
 
 </robot>

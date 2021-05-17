@@ -4,7 +4,7 @@
     <!-- Motor Limits b3m in N-m and rad/s -->
     <xacro:property name="torque" value="4.1" />
     <xacro:property name="velocity" value="4.6" />
-    <xacro:property name="abd_lim" value="1.572" />
+    <xacro:property name="abd_lim" value="10.22" />
     <xacro:property name="hip_lim" value="10.22" />
     <xacro:property name="knee_lim" value="10.22" />
 
@@ -20,6 +20,15 @@
                 <child link="base_link"/>
             </joint>
         </xacro:if>
+        <xacro:unless value="${fixed}">
+            <link name="dummy">
+            </link>
+            
+            <joint name="dummy_joint" type="fixed">
+                <parent link="dummy"/>
+                <child link="base_link"/>
+            </joint>
+        </xacro:unless>
 
         <link name="base_link">
             <inertial>
